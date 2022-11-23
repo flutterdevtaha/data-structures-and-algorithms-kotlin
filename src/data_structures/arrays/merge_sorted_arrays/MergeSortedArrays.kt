@@ -16,16 +16,21 @@ fun mergeSortedArrays(arr1: IntArray, arr2: IntArray): IntArray {
             j++
         }
         k++
+        println("1@mergedArray = ${mergedArray.contentToString()}, arr1 = ${arr1.contentToString()}, arr2 = ${arr2.contentToString()}, i = $i, j = $j, k = $k")
     }
 
     while (i < arr1.size) {
         mergedArray[k] = arr1[i]
+        println("2@mergedArray = ${mergedArray.contentToString()}, arr1 = ${arr1.contentToString()}, i = $i, k = $k")
+
         i++
         k++
     }
 
     while (j < arr2.size) {
         mergedArray[k] = arr2[j]
+        println("3@mergedArray = ${mergedArray.contentToString()}, arr2 = ${arr2.contentToString()}, j = $j, k = $k")
+
         j++
         k++
     }

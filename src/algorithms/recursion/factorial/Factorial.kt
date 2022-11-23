@@ -3,10 +3,7 @@ package algorithms.recursion.factorial
 class Factorial {
     // recursive
     fun findFactorialRecursive(number: Int): Int {
-        return if (number < 2)
-            1
-        else
-            number * findFactorialIterative(number - 1)
+        return if (number < 2) 1 else number * findFactorialIterative(number - 1)
     }
 
     // iterative
