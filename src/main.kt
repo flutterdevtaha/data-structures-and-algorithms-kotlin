@@ -25,6 +25,7 @@ class DoublyLinkedList(value: Int) {
 
     fun prepend(value: Int) {
         val newNode = Node(value)
+        head?.prev = newNode
         newNode.next = head
         head = newNode
         length++
@@ -41,7 +42,6 @@ class DoublyLinkedList(value: Int) {
         }
         return myList
     }
-
 
     fun insert(index: Int, value: Int) {
         if (index < 0 || index > length) {
@@ -83,7 +83,6 @@ class DoublyLinkedList(value: Int) {
         }
         return myList
     }
-
 
     fun remove(index: Int) {
         val leader: Node? = traverseToIndex(index - 1)
