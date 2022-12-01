@@ -1,33 +1,26 @@
 fun main() {
-
-    val doublyLinkedList = DoublyLinkedList(1)
-    doublyLinkedList.append(5)
-    doublyLinkedList.prepend(15)
-    doublyLinkedList.append(10)
-    doublyLinkedList.insert(2, 99)
-    doublyLinkedList.remove(2)
-
-    println(doublyLinkedList.printList().contentToString())
-    println(doublyLinkedList.reverseList().contentToString())
+    println("Hello, world!")
+    val linkedList = LinkedList(5)
+    linkedList.append(6)
+    linkedList.append(15)
+    linkedList.remove(1)
+    linkedList.prepend(10)
+    linkedList.insert(1, 20)
+    println(linkedList.printList().contentToString())
+    linkedList.reverse(linkedList)
+    println(linkedList.printList().contentToString())
 }
 
-class DoublyLinkedList(value: Int) {
+
+class LinkedList(value: Int) {
     private var head: Node? = Node(value)
     private var tail: Node? = head
-    var length: Int = 1
+    private var length: Int = 1
+
     fun append(value: Int) {
         val newNode = Node(value)
-        newNode.prev = tail
         tail?.next = newNode
         tail = newNode
-        length++
-    }
-
-    fun prepend(value: Int) {
-        val newNode = Node(value)
-        head?.prev = newNode
-        newNode.next = head
-        head = newNode
         length++
     }
 
@@ -43,6 +36,13 @@ class DoublyLinkedList(value: Int) {
         return myList
     }
 
+    fun prepend(value: Int) {
+        val newNode = Node(value)
+        newNode.next = head
+        head = newNode
+        length++
+    }
+
     fun insert(index: Int, value: Int) {
         if (index < 0 || index > length) {
             println("Index Out Of Bounds For Length $length")
@@ -55,9 +55,7 @@ class DoublyLinkedList(value: Int) {
             val leader: Node? = traverseToIndex(index - 1)
             val holdingPointer: Node? = leader?.next
             leader?.next = newNode
-            newNode.prev = leader
             newNode.next = holdingPointer
-            holdingPointer?.prev = newNode
             length++
         }
     }
@@ -72,27 +70,36 @@ class DoublyLinkedList(value: Int) {
         return current
     }
 
-    fun reverseList(): IntArray {
-        val myList = IntArray(length)
-        var current: Node? = tail
-        var i = 0
-        while (current != null) {
-            myList[i] = current.value
-            current = current.prev
-            i++
-        }
-        return myList
-    }
-
     fun remove(index: Int) {
         val leader: Node? = traverseToIndex(index - 1)
         val unwantedNode: Node? = leader?.next
         leader?.next = unwantedNode?.next
-        unwantedNode?.next?.prev = leader
         length--
     }
 
+
+    fun reverse() {
+        if (head?.next != null) {
+            return head
+        }
+        val newList = LinkedList(linkedList.head!!.value)
+        var current: Node? = linkedList.head
+        while (current?.next != null) {
+            current = current.next
+            val newNode = Node(current!!.value)
+            newNode.next = newList.head
+            newList.head = newNode
+            newList.length++
+        }
+        return newList
+    }
 }
 
-data class Node(var value: Int, var next: Node? = null, var prev: Node? = null)
+class Node(var value: Int) {
+    var next: Node? = null
+}
+
+
+
+
 
